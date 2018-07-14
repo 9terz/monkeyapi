@@ -1,0 +1,22 @@
+{
+  "name": "monkeyapi",
+  "version": "1.0.0",
+  "description": "Monkey API for RodFaiFahMaHaNaTel2 project implemented in Go",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/9terz/monkeyapi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/9terz/monkeyapi/issues"
+  },
+  "homepage": "https://github.com/9terz/monkeyapi#readme",
+  "dependencies": {
+    "npm": "^6.2.0"
+  }
+}
