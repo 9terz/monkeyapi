@@ -247,4 +247,52 @@ app.post("/matching", async (req, res) => {
   }
 });
 
+app.get("/tracking/:id", async (req, res) => {
+  const id = req.params.id;
+
+  let filters = {
+    id,
+    type: "user"
+  };
+
+  try {
+    let response = await db.find(filters);
+    let user = response.data[0];
+    let station = Object.keys(btsMap).filter(
+      station => btsMap[station] === user.latest_station
+    )[0];
+    res.json({
+      id: user.id,
+      station
+    });
+  } catch (e) {
+    throw e;
+  }
+});
+
+app.post("/tracking/:id", async (req, res) => {
+  const id = req.params.id;
+  const station = req.body.station;
+
+  let filters = {
+    type: "user",
+    id
+  };
+
+  try {
+    let response = await db.find(filters);
+    let me = response.data[0];
+    me.latest_station = btsMap[station];
+    let updateResponse = await db.update(me._id, me);
+    if (updateResponse.status == "success") {
+      res.json({
+        status: updateResponse.status,
+        data: updateResponse.data
+      });
+    }
+  } catch (e) {
+    throw e;
+  }
+});
+
 app.listen(3000);
