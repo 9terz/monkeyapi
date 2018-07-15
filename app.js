@@ -82,7 +82,9 @@ app.post("/users", async (req, res) => {
   const destination = btsMap[req.body.destination];
   let user = {
     source: source,
+    source_station: req.body.source,
     destination: destination,
+    destination_station: req.body.destination,
     path: calculatePath(source, destination),
     direction: source > destination ? -1 : 1,
     latest_station: source,
@@ -91,7 +93,8 @@ app.post("/users", async (req, res) => {
     id: uniqid(),
     matched_user_id: null,
     meeting_point: null,
-    meeting_station: null
+    meeting_station: null,
+    buy_destination: null
   };
 
   try {
@@ -199,12 +202,19 @@ const algo = async (myId, users) => {
     me.matched_user_id = targetUser.id;
     me.meeting_point = meetingPoint;
     me.meeting_station = meetingStation;
+    me.buy_destination = Object.keys(btsMap).filter(
+      station => btsMap[station] === targetUser.destination
+    )[0];
+
     await db.update(me._id, me);
 
     targetUser.status = "matched";
     targetUser.matched_user_id = me.id;
     targetUser.meeting_point = meetingPoint;
     targetUser.meeting_station = meetingStation;
+    targetUser.buy_destination = Object.keys(btsMap).filter(
+      station => btsMap[station] === me.destination
+    )[0];
     await db.update(targetUser._id, targetUser);
 
     return me;
