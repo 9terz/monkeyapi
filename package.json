@@ -4,7 +4,8 @@
   "description": "Monkey API for RodFaiFahMaHaNaTel2 project implemented in Go",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,13 @@
   },
   "homepage": "https://github.com/9terz/monkeyapi#readme",
   "dependencies": {
-    "npm": "^6.2.0"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "npm": "^6.2.0",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.2"
   }
 }
