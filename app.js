@@ -74,6 +74,7 @@ app.post("/users/:id", async (req, res) => {
     };
     try {
       let updateResponse = await db.update(user._id, newUser);
+      res.json({ status: "success" });
     } catch (e) {
       console.log("Inner catch");
       res.json({ status: "error", message: e.message });
