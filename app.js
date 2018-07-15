@@ -268,12 +268,14 @@ app.get("/tracking/:id", async (req, res) => {
   try {
     let response = await db.find(filters);
     let user = response.data[0];
-    let station = Object.keys(btsMap).filter(
+    let station_name = Object.keys(btsMap).filter(
       station => btsMap[station] === user.latest_station
     )[0];
+    let station = btsMap[station_name];
     res.json({
       id: user.id,
-      station
+      station,
+      station_name
     });
   } catch (e) {
     throw e;
